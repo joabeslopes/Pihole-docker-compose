@@ -1,0 +1,27 @@
+services:
+ pihole:
+  image: pihole/pihole
+  container_name: pihole
+  restart: always
+  volumes:
+   - pihole_app:/etc/pihole
+   - pihole_dns_config:/etc/dnsmasq.d
+  ports:
+   - 80:80
+   - 53:53/tcp
+   - 53:53/udp
+   - 67:67/tcp
+   - 67:67/udp
+  environment:
+   TZ: America/Sao_Paulo
+   WEBPASSWORD: password
+   SERVERIP: your.ip.here
+  deploy:
+   resources:
+    limits:
+     cpus: '1'
+     memory: 2gb
+
+volumes:
+ pihole_app:
+ pihole_dns_config:
